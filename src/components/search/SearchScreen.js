@@ -1,11 +1,28 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import queryString from 'query-string';
 import { UserCard } from '../users/UserCard';
 import { useForm } from '../../hooks/useForm';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faCoffee } from '@fortawesome/fontawesome-free-solid'
+import { faUser } from '@fortawesome/fontawesome-free-solid'
+import {UserFollowers} from '../chart/UserFollowers';
 import { FaSearch } from 'react-icons/fa';
+import { Container, Row, Col,ScreenClassProvider  } from 'react-grid-system';
+import PropTypes from "prop-types";
+import './Grid.css'
+
+const Grid = (props) => {
+    return (
+        <div className={['Grid', props.className].join(' ')}>
+            {props.children}
+        </div>
+    );
+};
+Grid.propTypes = {
+    className: PropTypes.string
+};
+export default Grid;
+
 
 export const SearchScreen = ({ history }) => {
 
@@ -39,17 +56,14 @@ export const SearchScreen = ({ history }) => {
         history.push(`?q=${ searchText }`);
     }
 
-    var FontAwesome = require('react-fontawesome');
+  require('react-fontawesome');
 
     return (
         <div>
-            <h1>Test de ReactJS</h1>
-            <hr />
            
-            <div className="row">
-                
-                <div className="col-5">
-                    <h4>
+ <Container fluid>
+  <Row>
+    <Col> <h4>
                         <FontAwesomeIcon icon={faUser} size='2x'/> Buscar Usuario
                     </h4>
                     <hr />
@@ -71,13 +85,8 @@ export const SearchScreen = ({ history }) => {
                         <FaSearch />
                             Buscar...
                         </button>
-                    </form>
-
-                </div>
-
-                <div className="col-7">
-
-                    <h4> Resultados </h4>
+                    </form></Col>
+    <Col>  <h4> Resultados </h4>
                     <hr />
 
                     { 
@@ -97,7 +106,7 @@ export const SearchScreen = ({ history }) => {
                     }
 
                     {
-                        userFiltered.slice(0,10).map( user => user.login.includes(searchText) || searchText==""?
+                        userFiltered.slice(0,10).map( user => user.login.includes(searchText) || searchText===""?
 						(
                             <UserCard 
                                 key={ user.id } 
@@ -105,11 +114,22 @@ export const SearchScreen = ({ history }) => {
                             />
                         ):null)
                     }
-
-                </div>
-
-            </div>
-
+</Col>
+  </Row>
+  <br />
+  <Row>
+    <Col>  <UserFollowers /></Col>
+ 
+  </Row>
+</Container>
+ 
         </div>
+		
+
+ 
+ 
+
+  
     )
 }
+
