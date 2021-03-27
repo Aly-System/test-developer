@@ -14,7 +14,7 @@ export const useForm = ( initialState = {} ) => {
     }
 
     const handleInputChange = ({ target }) => {
-        if(target.value.includes("react") ==true)
+        if(target.value.includes("react") ===true)
 		toast.error('texto no permitido', {position: toast.POSITION.TOP_RIGHT})
 
 		else	
