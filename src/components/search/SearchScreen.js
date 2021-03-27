@@ -3,7 +3,10 @@ import queryString from 'query-string';
 import { UserCard } from '../users/UserCard';
 import { useForm } from '../../hooks/useForm';
 import { useLocation } from 'react-router-dom';
- 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faCoffee } from '@fortawesome/fontawesome-free-solid'
+import { FaSearch } from 'react-icons/fa';
+
 export const SearchScreen = ({ history }) => {
 
     const location = useLocation();
@@ -16,8 +19,8 @@ export const SearchScreen = ({ history }) => {
     } );
     const { searchText } = formValues;
     
-       const [userFiltered,setUserFiltered]=React.useState([]);
-   const getData=async ()=>{
+    const [userFiltered,setUserFiltered]=React.useState([]);
+    const getData=async ()=>{
     fetch('https://api.github.com/users'
      )
       .then(function(response){
@@ -36,15 +39,19 @@ export const SearchScreen = ({ history }) => {
         history.push(`?q=${ searchText }`);
     }
 
+    var FontAwesome = require('react-fontawesome');
+
     return (
         <div>
             <h1>Test de ReactJS</h1>
             <hr />
-            
+           
             <div className="row">
                 
                 <div className="col-5">
-                    <h4> Buscar Usuario </h4>
+                    <h4>
+                        <FontAwesomeIcon icon={faUser} size='2x'/> Buscar Usuario
+                    </h4>
                     <hr />
 
                     <form onSubmit={ handleSearch }>
@@ -57,11 +64,11 @@ export const SearchScreen = ({ history }) => {
                             value={ searchText }
                             onChange={ handleInputChange }
                         />
-
                         <button
                             type="submit"
                             className="btn m-1 btn-block btn-outline-primary"
                         >
+                        <FaSearch />
                             Buscar...
                         </button>
                     </form>
