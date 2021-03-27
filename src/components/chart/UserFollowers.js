@@ -1,49 +1,73 @@
 import React from 'react'
 import { Bar, defaults } from 'react-chartjs-2'
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 defaults.global.tooltips.enabled = false
 defaults.global.legend.position = 'bottom'
 
 export const UserFollowers = (test) => {
-	  const { userId } = useParams();
-     const [user,setUser]=React.useState([]);
-     const [tst,setTst]=React.useState([]);
+ 
+     const [follower,setFollower]=React.useState([]);
+     const [login,setLogin]=React.useState([]);
+     const arrauser=[];
+ 
+const arrafollowers2=[];
+   
+   const getData3= (follows)=>{
+	   setFollower(follows)
+   }
+   
+	const getData2=async (userLogin)=>{
+		   var setDatx="";
+				 await fetch('https://api.github.com/users/'+userLogin
+				 )
+				  .then(function(response){
+					return response.json();
+				  })
+				  .then(function(response) {
+				     setFollower(follower.concat([response.followers]))
+ 
+				  });
+				 
+			  } 
+
    const getData=async ()=>{
-    fetch('https://api.github.com/users/'+userId+'/followers'
+    fetch('https://api.github.com/users'
      )
       .then(function(response){
         return response.json();
       })
       .then(function(myJson) {
-		setUser(myJson)
-		console.log("myJson ",myJson)
-		console.log("user ",userId)
-       // let dat=myJson.find(item => item.login==userId)		
-		setTst(myJson.length) 
+		  let usery=myJson
+		  let primerosUsers=usery.slice(0,10);
+		for (const nUser of primerosUsers) {	
+		
+          arrauser.push(nUser.login);
+		 getData2(nUser.login)
+  		
+		}
+		
+		setLogin(arrauser) 
+ 
       });
   }
   React.useEffect(()=>{
     getData()
   },[])
-  
-	
+    		
+ 	
+			
   return (
     <div>
       <Bar
         data={{
-          
+          labels:login,
+	 
           datasets: [
-            {
+            { title: "2",
               label: '# followers',
-              data: [tst],
-              backgroundColor: [
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-              ],
-              borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(255, 159, 64, 1)',
-              ],
+              data: follower,
+              backgroundColor: 'green',
+              borderColor: "green",
               borderWidth: 1,
             },
             // {
@@ -53,7 +77,8 @@ export const UserFollowers = (test) => {
             //   borderColor: 'red',
             // },
           ],
-        }}
+        }} 
+        		
         height={400}
         width={200}
         options={{
@@ -72,6 +97,12 @@ export const UserFollowers = (test) => {
               fontSize: 25,
             },
           },
+	 title: {
+        display: true,
+        text: 'Follower by users',
+		 fontSize: 25,
+      },
+      legend: { display: true }
         }}
       />
     </div>
