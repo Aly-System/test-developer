@@ -7,9 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/fontawesome-free-solid'
 import {UserFollowers} from '../chart/UserFollowers';
 import { FaSearch } from 'react-icons/fa';
+<<<<<<< HEAD
+import { Container, Row, Col  } from 'react-grid-system';
+import PropTypes from "prop-types";
+import './Grid.scss'
+=======
 import { Container, Row, Col,ScreenClassProvider  } from 'react-grid-system';
 import PropTypes from "prop-types";
 import './Grid.css'
+>>>>>>> 95af45770db0993291fee547a7d5e9ab2eb5b980
 
 const Grid = (props) => {
     return (

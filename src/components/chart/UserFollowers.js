@@ -1,6 +1,5 @@
 import React from 'react'
 import { Bar, defaults } from 'react-chartjs-2'
-import { useParams } from 'react-router-dom';
 defaults.global.tooltips.enabled = false
 defaults.global.legend.position = 'bottom'
 
@@ -9,15 +8,8 @@ export const UserFollowers = (test) => {
      const [follower,setFollower]=React.useState([]);
      const [login,setLogin]=React.useState([]);
      const arrauser=[];
- 
-const arrafollowers2=[];
-   
-   const getData3= (follows)=>{
-	   setFollower(follows)
-   }
    
 	const getData2=async (userLogin)=>{
-		   var setDatx="";
 				 await fetch('https://api.github.com/users/'+userLogin
 				 )
 				  .then(function(response){
@@ -25,7 +17,7 @@ const arrafollowers2=[];
 				  })
 				  .then(function(response) {
 				     setFollower(follower.concat([response.followers]))
- 
+                     
 				  });
 				 
 			  } 
@@ -45,16 +37,13 @@ const arrafollowers2=[];
 		 getData2(nUser.login)
   		
 		}
-		
 		setLogin(arrauser) 
  
       });
   }
-  React.useEffect(()=>{
+   React.useEffect(()=>{
     getData()
   },[])
-    		
- 	
 			
   return (
     <div>
@@ -101,8 +90,7 @@ const arrafollowers2=[];
         display: true,
         text: 'Follower by users',
 		 fontSize: 25,
-      },
-      legend: { display: true }
+      }
         }}
       />
     </div>
