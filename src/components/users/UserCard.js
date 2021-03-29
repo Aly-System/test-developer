@@ -17,7 +17,6 @@ export const UserCard = ({
                             ( login !== "") 
                                 && <p className="card-text">{ id }. { login } </p>
                         }
-
                         
                         <Link to={ `./user/${ login }` }>
                             Más...

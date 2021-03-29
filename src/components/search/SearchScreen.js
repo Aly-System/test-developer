@@ -9,7 +9,7 @@ import {UserFollowers} from '../chart/UserFollowers';
 import { FaSearch } from 'react-icons/fa';
 import { Container, Row, Col  } from 'react-grid-system';
 import PropTypes from "prop-types";
-import './Grid.scss'
+import './../../assets/Grid.scss';
 
 const Grid = (props) => {
     return (
@@ -22,7 +22,6 @@ Grid.propTypes = {
     className: PropTypes.string
 };
 export default Grid;
-
 
 export const SearchScreen = ({ history }) => {
 
@@ -60,76 +59,70 @@ export const SearchScreen = ({ history }) => {
 
     return (
         <div>
-           
- <Container fluid>
-  <Row>
-    <Col> <h4>
-                        <FontAwesomeIcon icon={faUser} size='2x'/> Buscar Usuario
-                    </h4>
-                    <hr />
+    
+        <Container fluid>
+        <Row>
+            <Col> <h4>
+                <FontAwesomeIcon icon={faUser} size='2x'/> Buscar Usuario
+            </h4>
+            <hr />
 
-                    <form onSubmit={ handleSearch }>
-                        <input 
-                            type="text"
-                            placeholder="Encuentra al usuario"
-                            className="form-control"
-                            name="searchText"
-                            autoComplete="off"
-                            value={ searchText }
-                            onChange={ handleInputChange }
-                        />
-                        <button
-                            type="submit"
-                            className="btn m-1 btn-block btn-outline-primary"
-                        >
-                        <FaSearch />
-                            Buscar...
-                        </button>
-                    </form></Col>
-    <Col>  <h4> Resultados </h4>
-                    <hr />
+            <form onSubmit={ handleSearch }>
+                <input 
+                    type="text"
+                    placeholder="Encuentra al usuario"
+                    className="form-control"
+                    name="searchText"
+                    autoComplete="off"
+                    value={ searchText }
+                    onChange={ handleInputChange }
+                />
+                <button
+                    type="submit"
+                    className="btn m-1 btn-block btn-outline-primary"
+                >
+                <FaSearch />
+                    Buscar...
+                </button>
+            </form></Col>
+        <Col>  <h4> Resultados </h4>
+            <hr />
 
-                    { 
-                        (q ==='') 
-                            && 
-                            <div className="alert alert-info">
-                                Lista de usuarios
-                            </div>
-                    }
+            { 
+                (q ==='') 
+                    && 
+                    <div className="alert alert-info">
+                        Lista de usuarios
+                    </div>
+            }
 
-                    { 
-                        (q !=='' && userFiltered.length === 0 ) 
-                            && 
-                            <div className="alert alert-danger">
-                                No existe el usuario { q }
-                            </div>
-                    }
+            { 
+                (q !=='' && userFiltered.length === 0 ) 
+                    && 
+                    <div className="alert alert-danger">
+                        No existe el usuario { q }
+                    </div>
+            }
 
-                    {
-                        userFiltered.slice(0,10).map( user => user.login.includes(searchText) || searchText===""?
-						(
-                            <UserCard 
-                                key={ user.id } 
-                                { ...user }
-                            />
-                        ):null)
-                    }
-</Col>
-  </Row>
-  <br />
-  <Row>
-    <Col>  <UserFollowers /></Col>
- 
-  </Row>
-</Container>
- 
-        </div>
-		
+            {
+                userFiltered.slice(0,10).map( user => user.login.includes(searchText) || searchText===""?
+                (
+                    <UserCard 
+                        key={ user.id } 
+                        { ...user }
+                    />
+                ):null)
+            }
+        </Col>
+        </Row>
+        <br />
+        <Row>
+            <Col>  <UserFollowers /></Col>
+        
+        </Row>
+        </Container>
 
- 
- 
+</div>
 
-  
-    )
+)
 }
-
