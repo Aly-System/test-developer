@@ -1,0 +1,226 @@
+$telefono: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
+/** Globales **/
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+  line-height: 2;
+  background-color: #3c6997;
+}
+
+img {
+  max-width: 100%;
+}
+
+.contenedor {
+  max-width: 120rem;
+  margin: 0 auto 0 auto;
+}
+
+h1 {
+  font-size: 3.8rem;
+}
+
+h2 {
+  font-size: 3.4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.6rem;
+}
+
+/** Media Queries **/
+@mixin telefono {
+  @media (min-width: #{$telefono}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+@mixin grid($columnas, $espaciado) {
+  display: grid;
+  gap: $espaciado;
+  grid-template-columns: repeat($columnas, 1fr);
+}
+
+/** Aplicacion **/
+
+.header-principal {
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #094074;
+  padding: 1rem;
+
+  h1 {
+    margin: 0;
+    color: #fff;
+  }
+}
+
+.app {
+  height: 100vh;
+}
+
+.seccion-principal {
+  @include tablet {
+    @include grid(2, 2rem);
+  }
+}
+
+.imput-formulario {
+  margin-top: 5rem;
+
+  text-align: center;
+
+  color: white;
+  label {
+    font-size: 3rem;
+  }
+  input {
+    padding: 1rem;
+    border-radius: 15px;
+    border: none;
+  }
+}
+
+.boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  button {
+    display: block;
+    width: 60%;
+    border: none;
+    color: rgb(136, 136, 136);
+    font-size: 2rem;
+    background-color: #ffdd4a;
+    padding: 1rem 0;
+    border-radius: 15px;
+  }
+}
+
+.contenedor-resultados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.usuario-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: black;
+  width: 95%;
+  background-color: white;
+  border-radius: 15px;
+  margin: 1rem 0;
+  padding: 1rem;
+  flex-wrap: wrap;
+
+  .datos-usuario {
+    padding: 1rem;
+    font-weight: bold;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  img {
+    height: 100px;
+    border-radius: 5px;
+  }
+}
+
+.error {
+  margin: 5rem;
+  display: block;
+  background-color: darken($color: red, $amount: 10%);
+  text-align: center;
+  color: white;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+
+.basicos{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        height: 300px;
+        border-radius: 50%;
+    }
+    p{
+        color: white;
+        font-size: 3rem;
+        font-weight: bolder;
+        margin: 0;
+        padding: 1rem;
+    }
+}
+
+.detalles{
+    background-color: #FE9000;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+
+    .arriba{
+        @include grid(3,1rem);
+ 
+    }
+
+    .abajo{
+        @include grid(2, 1rem )
+    }
+
+
+}
+
+.contenedor-grafico{
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 10rem;
+
+}
+
+.formulario-busqueda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 85vh;
+}
